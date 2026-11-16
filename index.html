@@ -77,20 +77,16 @@
     function loadGiscus() {
       const script = document.createElement('script');
       script.src = 'https://giscus.app/client.js';
-      
-      // ▼ 아래 속성값들을 giscus.app에서 발급받은 본인 저장소 값으로 변경하세요 ▼
-      script.setAttribute('data-repo', 't01089942756-design/FinalWeb'); // 본인 계정/저장소명
-      script.setAttribute('data-repo-id', '[ENTER REPO ID HERE]');       // 발급받은 REPO ID
-      script.setAttribute('data-category', 'General');                   // 설정한 Discussions 카테고리
-      script.setAttribute('data-category-id', '[ENTER CATEGORY ID HERE]'); // 발급받은 CATEGORY ID
-      // ▲ 여기까지 본인 설정값으로 교체 ▲
-
+      script.setAttribute('data-repo', 't01089942756-design/FinalWeb');
+      script.setAttribute('data-repo-id', 'R_kgDOVvx7zg');
+      script.setAttribute('data-category', 'General');
+      script.setAttribute('data-category-id', 'DIC_kwDOVvx7zs4DLOYD');
       script.setAttribute('data-mapping', 'pathname');
       script.setAttribute('data-strict', '0');
       script.setAttribute('data-reactions-enabled', '1');
       script.setAttribute('data-emit-metadata', '0');
-      script.setAttribute('data-input-position', 'top');
-      script.setAttribute('data-theme', 'light');
+      script.setAttribute('data-input-position', 'bottom');
+      script.setAttribute('data-theme', 'preferred_color_scheme');
       script.setAttribute('data-lang', 'ko');
       script.setAttribute('crossorigin', 'anonymous');
       script.async = true;
