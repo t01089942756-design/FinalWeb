@@ -1,10 +1,103 @@
-<!Doctype html>
-<html>
-  <head> <title> 게시판 연결 실습 </title></head>
-  <body>
-    <hr>
-    <a href="https://github.com/t01089942756-design/FinalWeb/issues/1#issue-6411851053"> 이슈 게시판 이용 </a>
-    <a href="#"> 방명록 이동 </a>
-    <br>
-  </body>
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FinalWeb - 방명록</title>
+  <style>
+    body {
+      font-family: 'Malgun Gothic', sans-serif;
+      margin: 20px;
+      line-height: 1.6;
+    }
+
+    /* 상단 링크 스타일 */
+    .top-link {
+      font-size: 18px;
+      color: #551A8B;
+      text-decoration: underline;
+      cursor: pointer;
+    }
+
+    /* 방명록 영역 (초기 숨김 처리) */
+    #guestbook-section {
+      display: none;
+      margin-top: 25px;
+      padding: 20px;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      max-width: 800px;
+      background-color: #ffffff;
+    }
+
+    #guestbook-section h2 {
+      margin-top: 0;
+      font-size: 20px;
+      border-bottom: 2px solid #333;
+      padding-bottom: 8px;
+      margin-bottom: 16px;
+    }
+  </style>
+</head>
+<body>
+
+  <hr>
+  <!-- 방명록 열기/닫기 링크 -->
+  <a href="#guestbook-section" id="toggle-guestbook" class="top-link">이슈 게시판 이용 방명록 이동</a>
+
+  <!-- 같은 페이지에 나타날 Giscus 방명록 영역 -->
+  <section id="guestbook-section">
+    <h2>방명록</h2>
+    <!-- Giscus 위젯이 삽입될 컨테이너 -->
+    <div id="giscus-container"></div>
+  </section>
+
+  <script>
+    const toggleLink = document.getElementById('toggle-guestbook');
+    const guestbookSection = document.getElementById('guestbook-section');
+    const giscusContainer = document.getElementById('giscus-container');
+    let isGiscusLoaded = false;
+
+    toggleLink.addEventListener('click', function(event) {
+      event.preventDefault(); // 페이지 이동 방지
+
+      if (guestbookSection.style.display === 'none' || guestbookSection.style.display === '') {
+        guestbookSection.style.display = 'block';
+
+        // 처음 열 때만 Giscus 스크립트를 생성하여 삽입
+        if (!isGiscusLoaded) {
+          loadGiscus();
+          isGiscusLoaded = true;
+        }
+      } else {
+        guestbookSection.style.display = 'none';
+      }
+    });
+
+    function loadGiscus() {
+      const script = document.createElement('script');
+      script.src = 'https://giscus.app/client.js';
+      
+      // ▼ 아래 속성값들을 giscus.app에서 발급받은 본인 저장소 값으로 변경하세요 ▼
+      script.setAttribute('data-repo', 't01089942756-design/FinalWeb'); // 본인 계정/저장소명
+      script.setAttribute('data-repo-id', '[ENTER REPO ID HERE]');       // 발급받은 REPO ID
+      script.setAttribute('data-category', 'General');                   // 설정한 Discussions 카테고리
+      script.setAttribute('data-category-id', '[ENTER CATEGORY ID HERE]'); // 발급받은 CATEGORY ID
+      // ▲ 여기까지 본인 설정값으로 교체 ▲
+
+      script.setAttribute('data-mapping', 'pathname');
+      script.setAttribute('data-strict', '0');
+      script.setAttribute('data-reactions-enabled', '1');
+      script.setAttribute('data-emit-metadata', '0');
+      script.setAttribute('data-input-position', 'top');
+      script.setAttribute('data-theme', 'light');
+      script.setAttribute('data-lang', 'ko');
+      script.setAttribute('crossorigin', 'anonymous');
+      script.async = true;
+
+      giscusContainer.appendChild(script);
+    }
+  </script>
+
+</body>
 </html>
